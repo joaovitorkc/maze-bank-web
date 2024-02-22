@@ -1,0 +1,17 @@
+#menuButtom {
+  display: none;
+}
+
+@media only screen and (max-width: 950px) {
+  #menuButtom {
+    display: block;
+  }
+
+  #ScrollAreaDashBoard {
+    padding: 0px;
+  }
+
+  #collapsed {
+    display: none;
+  }
+}
