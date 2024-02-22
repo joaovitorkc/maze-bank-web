@@ -23,7 +23,7 @@ import {
 // Icons
 import { Filter } from 'lucide-react';
 
-const ListPayments = ({ usersData }) => {
+const ListPayments = ({ paymentsData }) => {
     return (
         <>
             <div className="w-full">
@@ -68,9 +68,9 @@ const ListPayments = ({ usersData }) => {
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
-                        {usersData.length > 0 ? (
+                        {paymentsData.length > 0 ? (
                             <TableBody className="uppercase">
-                                {usersData.map((item) => (
+                                {paymentsData.map((item) => (
                                     <TableRow key={item?.id} className="border-t h-16">
                                         <TableCell className="text-slate-700 px-3 py-1.5 border-t">
                                             {item.transation_code}
@@ -85,7 +85,7 @@ const ListPayments = ({ usersData }) => {
                                             {
                                                 "R$"
                                                 +
-                                                item.amount
+                                                item?.amount
                                                     .replace('.', ',')
                                                     .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                                             }
@@ -93,7 +93,7 @@ const ListPayments = ({ usersData }) => {
                                     </TableRow>
                                 ))}
                                 {
-                                    Array.from({ length: 10 - usersData.length }, (_, index) => (
+                                    Array.from({ length: 10 - paymentsData.length }, (_, index) => (
                                         <TableRow key={index} className="border-t h-16">
                                             <TableCell
                                                 colSpan={12}

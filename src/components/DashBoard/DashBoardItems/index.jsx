@@ -23,7 +23,8 @@ import {
   ChevronDown,
   Pill,
   Boxes,
-  Banknote
+  Banknote,
+  User
 } from 'lucide-react';
 
 const DashBoardItems = () => {
@@ -60,10 +61,20 @@ const DashBoardItems = () => {
             <div className="space-y-1">
               <Link to="/gerenciar-pagamentos">
                 <Button
-                  variant={actualPage === "/gerenciar-pagamentos" || actualPage === "/gerenciar-pagamentos/:id" ? "secondary" : "ghost"}
+                  variant={actualPage === "/gerenciar-pagamentos" ? "secondary" : "ghost"}
                   className="w-full justify-start text-gray-700 text-base">
                   <Banknote className='mr-2 h-4 w-4' />
                   Pagamentos
+                </Button>
+              </Link>
+            </div>
+            <div className="space-y-1">
+              <Link to="/gerenciar-usuarios">
+                <Button
+                  variant={actualPage === "/gerenciar-usuarios" ? "secondary" : "ghost"}
+                  className="w-full justify-start text-gray-700 text-base">
+                  <User className='mr-2 h-4 w-4' />
+                  Usuários
                 </Button>
               </Link>
             </div>

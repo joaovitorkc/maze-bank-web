@@ -10,22 +10,22 @@ import ManagementHeader from '@/components/Management/ManagementHeader';
 import { getPayments } from '@/services/payments';
 
 const Payments = () => {
-  const [updateUserList, setUpdateUserlist] = useState();
-  const [usersData, setUsersData] = useState([]);
+  const [updatePaymentsList, setUpdatePaymentslist] = useState();
+  const [paymentsData, setPaymentsData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const promisse = getPayments();
         const data = await promisse
-        setUsersData(data)
+        setPaymentsData(data)
       } catch (error) {
         console.error(error);
       }
     }
 
     fetchData();
-  }, [updateUserList])
+  }, [updatePaymentsList])
 
   return (
     <>
@@ -39,7 +39,7 @@ const Payments = () => {
             <TabsTrigger value="view">Visualizar</TabsTrigger>
           </TabsList>
           <TabsContent value="view">
-            <ListPayments usersData={usersData} />
+            <ListPayments paymentsData={paymentsData} />
           </TabsContent>
         </Tabs>
       </section>
