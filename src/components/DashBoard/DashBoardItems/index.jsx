@@ -34,10 +34,13 @@ const DashBoardItems = () => {
 
   useEffect(() => {
     const isPaymentRoute = location.pathname.startsWith("/gerenciar-pagamentos");
+    const isUserRoute = location.pathname.startsWith("/gerenciar-usuarios");
 
     if (isPaymentRoute) {
       setActualPage("/gerenciar-pagamentos");
-    } else {
+    } else if (isUserRoute) {
+      setActualPage("/gerenciar-usuarios");
+    }  else {
       setActualPage(false);
     }
   }, [location.pathname]);
