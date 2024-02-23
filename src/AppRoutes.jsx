@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Payments from "./pages/payments/payments";
 import DashBoard from "./components/DashBoard";
 import Users from "./pages/users/users";
+import UpdateUser from "./pages/users/update-user";
 
 const AppRoutes = () => {
 
@@ -18,6 +19,7 @@ const AppRoutes = () => {
           <Route path="/" element={<DashBoard />}>
             <Route path="/gerenciar-pagamentos" element={<Payments  />} />
             <Route path="/gerenciar-usuarios" element={<Users  />} />
+            <Route path="/gerenciar-usuarios/editar/:userId" element={<UpdateUser  />} />
           </Route>
         </Routes>
       </BrowserRouter>

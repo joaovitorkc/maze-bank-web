@@ -9,6 +9,53 @@ const getUsers = async () => {
     }
 }
 
+const getUser = async (userId) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/getuser/${userId}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro na requisição GET:', error);
+        throw error;
+    }
+};
+
+const changeSituation = async (userId, newSituation) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/updateuser/${userId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ situation: newSituation }),
+        });
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro na requisição PATCH:', error);
+        throw error;
+    }
+};
+
+const updateUser = async (userId, userData) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/updateuser/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Erro na requisição PATCH:', error);
+      throw error;
+    }
+  };
+
 const createUser = async (userData) => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/users/insertuser`, {
@@ -32,4 +79,4 @@ const createUser = async (userData) => {
     }
 }
 
-export { getUsers, createUser }
+export { getUsers, getUser, changeSituation, updateUser, createUser }

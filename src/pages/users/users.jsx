@@ -8,7 +8,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ManagementHeader from '@/components/Management/ManagementHeader';
 
 // Services
-import { getUsers } from '@/services/users';
+import { changeSituation, getUsers } from '@/services/users';
+
+// Toast
+import { toast } from 'sonner';
 
 const Users = () => {
     const [updateUsersList, setUpdateUsersList] = useState();
@@ -26,7 +29,36 @@ const Users = () => {
         }
 
         fetchData();
-    }, [updateUsersList])
+    }, [updateUsersList]);
+
+    const handleSituation = async (e, userId) => {
+        try {
+
+            let newSituation;
+            e.target.innerHTML === "Ativo"
+                ? (newSituation = 0)
+                : (newSituation = 1);
+
+            const promise = changeSituation(userId, newSituation).then(() => {
+                setUsersData((state) =>
+                    state.map((user) => ({
+                        ...user,
+                        situation: +user.id === userId ? !user.situation : user.situation,
+                    }))
+                );
+                setUpdateUsersList(!updateUsersList)
+            });
+
+            toast.promise(promise, {
+                loading: 'Trocando situação...',
+                success: 'Situação trocada',
+                error: 'Erro ao cadastrar um usuário',
+            });
+
+        } catch (error) {
+
+        }
+    };
 
     return (
         <>
@@ -41,7 +73,10 @@ const Users = () => {
                         <TabsTrigger value="register">Cadastrar</TabsTrigger>
                     </TabsList>
                     <TabsContent value="view">
-                        <ListUsers usersData={usersData} />
+                        <ListUsers
+                            usersData={usersData}
+                            handleSituation={handleSituation}
+                        />
                     </TabsContent>
                     <TabsContent value="register">
                         <RegisterUser

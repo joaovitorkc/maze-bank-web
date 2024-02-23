@@ -27,7 +27,10 @@ import { Filter } from 'lucide-react';
 // Libs
 import { formatters } from '@/lib/formaters';
 
-const ListUsers = ({ usersData }) => {
+const ListUsers = ({
+    usersData,
+    handleSituation,
+}) => {
     return (
         <>
             <div className="w-full">
@@ -93,18 +96,13 @@ const ListUsers = ({ usersData }) => {
                                         <TableCell
                                             className="text-slate-700 px-3 py-1.5 border-t"
                                         >
-                                            {item.situation ? (
+                                            {item.situation === 1 ? (
                                                 <button className="flex items-center gap-1 px-2 py-0.5 rounded bg-green-500">
                                                     <span
                                                         className="text-sm text-white"
                                                         onClick={(e) => {
-                                                            if (item.id !== userId) {
-                                                                item.situation = false;
-                                                                handleSituation(e, item.id);
-                                                            } else {
-                                                                e.preventDefault();
-                                                                toast.error("Você não pode alterar seu propio usuário.");
-                                                            }
+                                                            item.situation = 0;
+                                                            handleSituation(e, item.id);
                                                         }}
                                                     >
                                                         Ativo
@@ -115,13 +113,8 @@ const ListUsers = ({ usersData }) => {
                                                     <span
                                                         className="text-sm text-white"
                                                         onClick={(e) => {
-                                                            if (item.id !== userId) {
-                                                                item.active = true;
-                                                                handleSituation(e, item.id);
-                                                            } else {
-                                                                e.preventDefault();
-                                                                toast.error("Você não pode alterar seu propio usuário.");
-                                                            }
+                                                            item.active = 1;
+                                                            handleSituation(e, item.id);
                                                         }}
                                                     >
                                                         Inativo
@@ -135,7 +128,7 @@ const ListUsers = ({ usersData }) => {
                                             className="text-slate-700 px-3 py-1.5 border-t"
                                         >
                                             <Link
-                                                to={`/gerenciar-usuarios/${item.id}`}
+                                                to={`/gerenciar-usuarios/editar/${item.id}`}
                                                 className="text-sm normal-case w-max text-white flex items-center gap-1 px-2 py-0.5 rounded bg-green-600"
                                                 onClick={(e) => {
                                                     if (item.id === userId) {
