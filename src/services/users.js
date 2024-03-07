@@ -14,7 +14,7 @@ const getUser = async (userId) => {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/users/getuser/${userId}`);
         const data = await response.json();
         return data;
-    } catch (error) {
+    } catch (error) { 
         console.error('Erro na requisição GET:', error);
         throw error;
     }
